@@ -127,7 +127,12 @@ namespace hpx::execution::experimental {
                 return sender.scheduler;
             }
 
-            // TODO: add forwarding_sender_query
+            template <typename Query>
+            friend constexpr bool tag_invoke(
+                forwarding_sender_query_t, Query const&) noexcept
+            {
+                return true;
+            }
 
             struct shared_state
             {

@@ -167,7 +167,12 @@ namespace hpx::execution::experimental {
                 return tag(s.sender);
             }
 
-            // TODO: add forwarding_sender_query
+            template <typename Query>
+            friend constexpr bool tag_invoke(
+                forwarding_sender_query_t, Query const&) noexcept
+            {
+                return true;
+            }
 
             template <typename Receiver>
             friend auto tag_invoke(

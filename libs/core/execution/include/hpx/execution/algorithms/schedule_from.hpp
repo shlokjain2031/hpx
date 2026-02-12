@@ -83,7 +83,12 @@ namespace hpx::execution::experimental {
                 return sender.scheduler;
             }
 
-            // TODO: add forwarding_sender_query
+            template <typename Query>
+            friend constexpr bool tag_invoke(
+                forwarding_sender_query_t, Query const&) noexcept
+            {
+                return true;
+            }
 
 #if defined(HPX_GCC_VERSION) && HPX_GCC_VERSION >= 110000
 #pragma GCC diagnostic push
